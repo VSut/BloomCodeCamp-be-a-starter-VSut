@@ -2,16 +2,23 @@ package com.hcc.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-
+@Entity
+@Table(name = "\"user\"")
 public class User implements org.springframework.security.core.userdetails.UserDetails{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String username;
     private String password;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     private List<Authority> authorities;
     private Date cohortStartDate;
 
